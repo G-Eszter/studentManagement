@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Students</title>
+    <link href="/style.css" rel="stylesheet" type="text/css"/>
+</head>
+<body>
+
+<h1>Students</h1>
+
+<div class="top-bar">
+    <form th:action="@{/students}" method="get" class="search-form">
+        <input type="text" name="search" placeholder="Search by name" th:value="${search}">
+        <button type="submit" class="btn">Search</button>
+    </form>
+
+    <a th:href="@{/students/new}" class="btn">New Student</a>
+</div>
+
+<table border="1">
+    <tr>
+        <th>First Name</th>
+        <th>Last Name</th>
+        <th>Email</th>
+        <th>Faculty</th>
+        <th>Actions</th>
+    </tr>
+    <tr th:each="student : ${students}">
+        <td th:text="${student.firstName}"></td>
+        <td th:text="${student.lastName}"></td>
+        <td th:text="${student.email}"></td>
+        <td th:text="${student.faculty.facultyName}"></td>
+        <td>
+            <a th:href="@{/students/edit/{id}(id=${student.id})}" class="btn">Edit</a>
+            <a th:href="@{/students/delete/{id}(id=${student.id})}" class="del_btn"
+               onclick="return confirm('Are you sure?');">Delete</a>
+        </td>
+    </tr>
+</table>
+<a th:href="@{/faculties}" class="btn" id="link">Go to Faculties</a>
+</body>
+</html>

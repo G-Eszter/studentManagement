@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Faculty Students</title>
+    <link href="/style.css" rel="stylesheet" type = "text/css"/>
+</head>
+<body>
+
+<h1 th:text="'Students of ' + ${faculty.facultyName}"></h1>
+
+<table border="1">
+    <tr>
+        <th>First name</th>
+        <th>Last name</th>
+        <th>Email</th>
+    </tr>
+
+    <tr th:each="student : ${students}">
+        <td th:text="${student.firstName}"></td>
+        <td th:text="${student.lastName}"></td>
+        <td th:text="${student.email}"></td>
+    </tr>
+</table>
+
+<a th:href="@{/faculties}" class="btn">Back to Faculties</a>
+
+</body>
+</html>

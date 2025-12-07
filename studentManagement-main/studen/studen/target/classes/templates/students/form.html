@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Student Form</title>
+    <link rel="stylesheet" th:href="@{/style.css}" />
+</head>
+<body>
+<h1 th:text="${student.id == null} ? 'New Student' : 'Edit Student'"></h1>
+
+<form th:action="@{/students/save}" th:object="${student}" method="post">
+    <input type="hidden" th:field="*{id}" />
+
+    <label>First Name:</label>
+    <input type="text" th:field="*{firstName}" />
+    <div th:if="${#fields.hasErrors('firstName')}"
+         th:errors="*{firstName}" class="error"></div>
+
+    <label>Last Name:</label>
+    <input type="text" th:field="*{lastName}" />
+    <div th:if="${#fields.hasErrors('lastName')}"
+         th:errors="*{lastName}" class="error"></div>
+
+    <label>Email:</label>
+    <input type="text" th:field="*{email}" />
+    <div th:if="${#fields.hasErrors('email')}"
+         th:errors="*{email}" class="error"></div>
+
+    <label>Faculty:</label>
+    <select th:field="*{facultyId}">
+        <option value="">-- select faculty --</option>
+        <option th:each="faculty : ${faculties}"
+                th:value="${faculty.id}"
+                th:text="${faculty.facultyName}">
+        </option>
+    </select>
+
+    <div th:if="${#fields.hasErrors('facultyId')}"
+         th:errors="*{facultyId}" class="error"></div>
+
+    <div class="form-button">
+        <button type="submit" class="btn">Save</button>
+    </div>
+</form>
+
+<a th:href="@{/students}" class="btn">Back to list</a>
+</body>
+</html>

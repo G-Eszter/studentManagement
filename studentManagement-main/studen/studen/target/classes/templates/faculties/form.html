@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>New Faculty</title>
+    <link href="/style.css" rel="stylesheet" type = "text/css"/>
+</head>
+<body>
+<h1>Create Faculty</h1>
+<form th:action="@{/faculties/save}" th:object="${faculty}" method="post">
+    <label>Faculty Name:</label>
+    <input type="text" th:field="*{facultyName}" />
+    <div th:if="${#fields.hasErrors('facultyName')}"
+         th:errors="*{facultyName}" class="error"></div>
+
+    <label>Location:</label>
+    <input type="text" th:field="*{location}" /><br/>
+
+    <label>Dean:</label>
+    <input type="text" th:field="*{dean}" /><br/>
+
+    <input type="hidden" th:field="*{id}" />
+
+    <div class="form-button">
+        <button type="submit" class="btn">Save</button>
+    </div>
+</form>
+<a th:href="@{/faculties}" class="btn">Back to list</a>
+</body>
+</html>
