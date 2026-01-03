@@ -9,12 +9,6 @@ import java.util.List;
 
 public interface StudentRepository extends JpaRepository<Student, Long> {
 
-    @Query("SELECT s FROM Student s WHERE " +
-            "LOWER(CONCAT(s.firstName, ' ', s.lastName)) LIKE LOWER(CONCAT('%', :name, '%')) " +
-            "OR LOWER(s.firstName) LIKE LOWER(CONCAT('%', :name, '%')) " +
-            "OR LOWER(s.lastName) LIKE LOWER(CONCAT('%', :name, '%'))")
-    List<Student> searchByFullName(@Param("name") String name);
-
     List<Student> findByFacultyId(Long facultyId);
     @Query("SELECT s FROM Student s " +
             "WHERE LOWER(CONCAT(s.firstName, ' ', s.lastName)) LIKE LOWER(CONCAT('%', :search, '%')) " +
@@ -23,3 +17,4 @@ public interface StudentRepository extends JpaRepository<Student, Long> {
     List<Student> searchByName(@Param("search") String search);
 
 }
+
